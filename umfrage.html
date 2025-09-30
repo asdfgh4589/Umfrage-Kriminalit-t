@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="de"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Schätzfrage Kriminalität&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h2 { margin-top: 40px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.people {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(50, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 10px 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.person {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 12px; height: 12px; border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.person.active { background-color: #1a73e8; } <span class="Apple-converted-space">  </span>/* Blau = eigene Schätzung */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.person.solution { background-color: #e84a1a; } /* Orange = richtige Zahl */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.person.half::after {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>content: "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: 0; left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 50%; height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #e84a1a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.slider-container { margin: 20px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.value { font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px; padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #1a73e8; border: none; color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px; cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button:hover { background-color: #1558b0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.feedback { margin-top: 10px; font-style: italic; color: #444; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h2&gt;Von 100 Schweizer:innen: Wie viele wurden innerhalb eines Jahres einer Straftat beschuldigt?&lt;/h2&gt;</p>
+<p class="p1">&lt;div class="people" id="people-ch"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;div class="slider-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;input type="range" id="slider-ch" min="0" max="100" value="0" oninput="updateSelection('ch')" aria-label="Schätzung für Schweizer:innen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span id="value-ch" class="value"&gt;0&lt;/span&gt; Personen</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div id="feedback-ch" class="feedback"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h2&gt;Von 100 Ausländer:innen: Wie viele wurden innerhalb eines Jahres einer Straftat beschuldigt?&lt;/h2&gt;</p>
+<p class="p1">&lt;div class="people" id="people-foreign"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;div class="slider-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;input type="range" id="slider-foreign" min="0" max="100" value="0" oninput="updateSelection('foreign')" aria-label="Schätzung für Ausländer:innen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span id="value-foreign" class="value"&gt;0&lt;/span&gt; Personen</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div id="feedback-foreign" class="feedback"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;button onclick="showSolution()"&gt;Lösung anzeigen&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const solution = { ch: 0.7, foreign: 2.1 };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function createPeople(containerId) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container = document.getElementById(containerId);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for (let i = 0; i &lt; 100; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const div = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>div.classList.add("person");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>div.setAttribute("title", "Person " + (i+1));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>container.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>createPeople("people-ch");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>createPeople("people-foreign");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function updateSelection(group) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const slider = document.getElementById("slider-" + group);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const value = document.getElementById("value-" + group);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container = document.getElementById("people-" + group);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const persons = container.getElementsByClassName("person");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const guessed = parseFloat(slider.value);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>value.textContent = guessed;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>for (let i = 0; i &lt; 100; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>persons[i].classList.remove("active", "solution", "half");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (i &lt; guessed) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>persons[i].classList.add("active");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("feedback-" + group).textContent = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function showSolution() {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>["ch", "foreign"].forEach(group =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const container = document.getElementById("people-" + group);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const persons = container.getElementsByClassName("person");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const correct = solution[group];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Feedback zur eigenen Schätzung</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const guessed = parseFloat(document.getElementById("slider-" + group).value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let feedback = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (guessed &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const factor = guessed / correct;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (factor &gt; 1.1) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>feedback = `Deine Schätzung war etwa ${factor.toFixed(1)}-mal so hoch wie die Realität.`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else if (factor &lt; 0.9) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>feedback = `Deine Schätzung lag deutlich unter der Realität (ca. ${factor.toFixed(1)}-mal zu niedrig).`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>feedback = `Sehr nah an der Realität geschätzt!`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("feedback-" + group).textContent = feedback;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Lösung darstellen</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const whole = Math.floor(correct);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hasHalf = correct % 1 &gt;= 0.5;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; 100; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>persons[i].classList.remove("active", "solution", "half");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; whole; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>persons[i].classList.add("solution");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (hasHalf) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>persons[whole].classList.add("half");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Slider &amp; Anzeige auf exakte Zahl setzen</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("value-" + group).textContent = correct.toFixed(1);</p>
+</body>
+</html>
